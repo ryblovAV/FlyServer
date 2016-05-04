@@ -1,7 +1,7 @@
 package config
 
 object MongoConfig {
-  val host = "192.168.1.47"
+  val host = "0.0.0.0"
   val db = "fly"
   val collection = "fly_file"
 }
