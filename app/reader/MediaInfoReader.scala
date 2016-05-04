@@ -15,7 +15,6 @@ object MediaInfoReader {
 
   val client = MongoClient(host, 27017)(db)
 
-
   def find(keys: List[MediaInfoKey]) = {
 
     def updateCountQuery(coll: MongoCollection, keys: List[DBObject]) = {
@@ -26,7 +25,7 @@ object MediaInfoReader {
 
     val coll = client(collection)
 
-    keys.foreach(k => debug(s"$k"))
+    keys.foreach(k => debug(s"-> tth = ${k.tth}, size = ${k.size}"))
 
     val keysMongoObjects = keys.map(k => MongoDBObject(TTH -> k.tth, SIZE -> k.size))
 
@@ -40,7 +39,7 @@ object MediaInfoReader {
     } onFailure { case e => info(s"Error!!! update countQuery: $e")}
 
     if (isDebugEnabled)
-      mediaInfoArray.foreach(i => debug(i.toString))
+      mediaInfoArray.foreach(i => debug(s"<- ${i}"))
 
     MongoDBObject(ARRAY -> mediaInfoArray)
 
